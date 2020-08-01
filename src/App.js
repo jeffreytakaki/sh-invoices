@@ -18,13 +18,20 @@ function App() {
             name: 'Jeff',
             email: 'jtakaki1@gmail.com',
             dueDate: '12/21/2020',
-            total: 555
+            lineItems: [
+                {description: 'Window installation', price: 550.00}
+            ],
+            total: 500.00
         },
         {
             name: 'Frank L',
             email: 'jtakaki1+02@gmail.com',
             dueDate: '1/1/2021',
-            total: 23.50
+            lineItems: [
+                {description: 'Plumbing fix', price: 49.99},
+                {description: 'Window installation', price: 550.00}
+            ],
+            total: 599.99
         }
     ]
     const [invoices, setInvoices] = useState(initial);
