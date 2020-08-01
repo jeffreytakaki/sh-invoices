@@ -2,32 +2,24 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 
-
-export const Invoice = () => {
-    const [invoice, setInvoice] = useState({name: 'initial', email: 'initial', descriptions: []});
-
-    const createInvoice = (e) => {
-        e.preventDefault();
-        console.log('invoice', invoice)
-    }
-
+export const Invoice = ({id, name, email, dueDate, total}) => {
+    
     return (
-        <div className='invoice-container'>
-            <form>
-                <div className="input-section">
-                    <label>Name:</label>
-                    <input type="text" placeholder="enter name" className="name" onChange={(e) => {setInvoice({...invoice, name: e.target.value})}}/>
-                </div>
-                <div className="input-section">
-                    <label>Email:</label>
-                    <input type="text" placeholder="enter email" className="name" onChange={(e) => {setInvoice({...invoice, email:  e.target.value})}}/>
-                </div>
-                <div className="invoice-footer">
-                    <Link to="/list-view">BACK</Link>
-                    <button onClick={createInvoice}>CREATE</button>
-                </div>
-            </form>
+        <div className="invoice-container">
+            <div className="invoice-column">
+                <ul>
+                    <li>Name: {name}</li>
+                    <li>Email: {email}</li>
+                    <li>Due Date: {dueDate}</li>
+                    <li>Total: {total}</li>
+                </ul>
+            </div>  
+            <div className="invoice-column">
+                <Link to={`/edit/${id}`}>Edit</Link>
+            </div>
             
         </div>
+    
+       
     )
 }

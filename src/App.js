@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -8,9 +8,18 @@ import {
 
 import { Header } from './components/Header'
 import  { Invoices } from './components/Invoices'
-import  { Invoice } from './components/Invoice'
+import  { CreateEditInvoice } from './components/Invoice/CreateEditInvoice'
+
+
 
 function App() {
+    const [invoices, setInvoices] = useState([]);
+
+    const addInvoice = (invoice) => {
+        // setInvoices([...invoices, invoice])
+        setInvoices(invoices.concat(invoice))
+    }
+
     return (
     <div className="App">
         <Header />
@@ -18,13 +27,13 @@ function App() {
             <Switch>
             <Route path="/list-view">
                 <h1>router list</h1>
-                <Invoices />
+                <Invoices invoices={invoices}/>
             </Route>    
             <Route path="/create">
-                <Invoice />
+                <CreateEditInvoice addInvoice={addInvoice}/>
             </Route>
             <Route path="/edit/:id">
-                <Invoice />
+                <CreateEditInvoice />
             </Route>
             <Route path="/">
 
