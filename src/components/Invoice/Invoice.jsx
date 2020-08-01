@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 
-export const Invoice = ({id, name, email, dueDate, total}) => {
+export const Invoice = ({index, name, email, dueDate, total}) => {
     
     return (
         <div className="invoice-container">
@@ -15,7 +15,7 @@ export const Invoice = ({id, name, email, dueDate, total}) => {
                 </ul>
             </div>  
             <div className="invoice-column">
-                <Link to={`/edit/${id}`}>Edit</Link>
+                <Link to={`/edit/${index}`}>Edit</Link>
             </div>
             
         </div>

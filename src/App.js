@@ -13,11 +13,40 @@ import  { CreateEditInvoice } from './components/Invoice/CreateEditInvoice'
 
 
 function App() {
-    const [invoices, setInvoices] = useState([]);
+    const initial = [
+        {
+            name: 'Jeff',
+            email: 'jtakaki1@gmail.com',
+            dueDate: '12/21/2020',
+            total: 555
+        },
+        {
+            name: 'Frank L',
+            email: 'jtakaki1+02@gmail.com',
+            dueDate: '1/1/2021',
+            total: 23.50
+        }
+    ]
+    const [invoices, setInvoices] = useState(initial);
 
     const addInvoice = (invoice) => {
         // setInvoices([...invoices, invoice])
+
         setInvoices(invoices.concat(invoice))
+    }
+
+    const editInvoice = (invoice, index) => {
+        let newArray = [...invoices]
+        newArray[index] = invoice
+        setInvoices(newArray)
+    }
+
+    const deleteInvoice = (invoices, index) => {
+        console.log('delete index ->', index);
+        let newArray = [...invoices]
+        newArray.splice(index, 1)
+        setInvoices(newArray)
+        
     }
 
     return (
@@ -25,19 +54,20 @@ function App() {
         <Header />
         <Router>
             <Switch>
-            <Route path="/list-view">
-                <h1>router list</h1>
-                <Invoices invoices={invoices}/>
-            </Route>    
-            <Route path="/create">
-                <CreateEditInvoice addInvoice={addInvoice}/>
-            </Route>
-            <Route path="/edit/:id">
-                <CreateEditInvoice />
-            </Route>
-            <Route path="/">
+                <Route path="/list-view">
+                    <h1>router list</h1>
+                    <Invoices invoices={invoices}/>
+                </Route>    
+                <Route path="/create">
+                    <CreateEditInvoice cb={addInvoice} />
+                </Route>
+                <Route path="/edit/:id" render={props => {
+                    const index = props.match.params.id;
+                    return <CreateEditInvoice cb={editInvoice} deleteInvoiceCb={deleteInvoice} invoices={invoices} index={index} />
+                }} />
+                <Route path="/">
 
-            </Route>
+                </Route>
             </Switch>
         </Router>
     </div>
