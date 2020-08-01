@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => {
+    const history = useHistory();
     const initialState = {id: '', name: '', email: '', dueDate: '', descriptions: []}
     const loadState = () => {
         if(invoices.length) {
@@ -16,27 +18,25 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
     const createInvoice = (e) => {
         e.preventDefault();
         cb(invoice, index)
-        // TODO - clear out fields after submit
         setInvoice({...initialState, initialState})
+        history.push('/list-view')
     }
 
     const deleteInvoice = (e) => {
         e.preventDefault();
         deleteInvoiceCb(invoices,index)
+        history.push('/list-view')
     }
 
     const RenderFooter = () => {
         if(invoices.length) {
-        
             return (
                 <div className="invoice-footer">
                     <Link to="/list-view">BACK</Link>
                     <button onClick={deleteInvoice}>DELETE</button>
                     <button onClick={createInvoice}>SAVE</button>
                 </div> 
-            )
-                
-                
+            ) 
         } else {
             return (
                 <div className="invoice-footer">
@@ -80,11 +80,8 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
                         value={invoice.dueDate}
                     />
                 </div>
-                
                 <RenderFooter />
-                
             </form>
-            
         </div>
     )
 }
