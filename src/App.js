@@ -10,8 +10,6 @@ import { Header } from './components/Header'
 import  { Invoices } from './components/Invoices'
 import  { CreateEditInvoice } from './components/Invoice/CreateEditInvoice'
 
-
-
 function App() {
     const initial = [
         {
@@ -37,8 +35,6 @@ function App() {
     const [invoices, setInvoices] = useState(initial);
 
     const addInvoice = (invoice) => {
-        // setInvoices([...invoices, invoice])
-
         setInvoices(invoices.concat(invoice))
     }
 
@@ -49,11 +45,9 @@ function App() {
     }
 
     const deleteInvoice = (invoices, index) => {
-        console.log('delete index ->', index);
         let newArray = [...invoices]
         newArray.splice(index, 1)
         setInvoices(newArray)
-        
     }
 
     return (
@@ -62,7 +56,6 @@ function App() {
         <Router>
             <Switch>
                 <Route path="/list-view">
-                    <h1>router list</h1>
                     <Invoices invoices={invoices}/>
                 </Route>    
                 <Route path="/create">
