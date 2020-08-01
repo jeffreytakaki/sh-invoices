@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export const LineItem = ({description='', price=0, saveLineItem,index}) => {
     const [LineItemObj, setLineItem] = useState({description, price});
 
     const submitChange = (e) => {
-        
-        
         if(e.target.className === 'description') {
             setLineItem({...LineItemObj, description: e.target.value})
         } else {
             setLineItem({...LineItemObj, price: e.target.value})
         }
-        
-        
+    }
+
+    useEffect(() => {
         // submit to higher order
         saveLineItem(LineItemObj, index)
-    }
+    }, [LineItemObj]);
     
     return (
         <li>

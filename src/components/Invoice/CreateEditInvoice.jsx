@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import {LineItem} from './LineItem';
@@ -18,7 +18,8 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
 
     const createInvoice = (e) => {
         e.preventDefault();
-        cb(invoice, index)
+        cb({...invoice, total: CalculateTotal()}, index)
+        // cb(invoice, index)
         setInvoice({...initialState, initialState})
         history.push('/list-view')
     }
@@ -45,6 +46,18 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
         setInvoice({...invoice, lineItems: newArray});
     }
 
+    const CalculateTotal = () => {
+        let total = 0;
+        invoice.lineItems.forEach((value, index) => {
+            const int = parseFloat(value.price)
+            if(int > 0) {
+                total = total + int
+            }
+        })
+
+        return total;
+    }
+
     const RenderFooter = () => {
         if(invoices.length) {
             return (
@@ -63,6 +76,10 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
             )  
         }
     }
+
+    useEffect(() => {
+        CalculateTotal()
+    }, [invoice]);
 
     return (
         <div className='invoice-container'>
@@ -101,6 +118,11 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
                     {renderLineItems}
                     <div onClick={addLineItem}>+</div>
                 </div>
+                <div className="input-section">
+                    total: <CalculateTotal />
+
+                </div>
+
                 <RenderFooter />    
             </form>
         </div>
