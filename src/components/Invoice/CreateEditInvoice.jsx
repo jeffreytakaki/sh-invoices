@@ -25,10 +25,12 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
 
     const createInvoice = (e) => {
         e.preventDefault();
-        cb({...invoice, total: CalculateTotal()}, index)
-        // cb(invoice, index)
-        setInvoice({...initialState, initialState})
-        history.push('/list-view')
+        if(invoice.lineItems.length > 0) {
+            cb({...invoice, total: CalculateTotal()}, index)
+            setInvoice({...initialState, initialState})
+            history.push('/list-view')
+        }
+        
     }
 
     const deleteInvoice = (e) => {
@@ -77,8 +79,8 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
         } else {
             return (
                 <div className="invoice-footer">
-                    <Link to="/list-view">BACK</Link>
-                    <button onClick={createInvoice}>CREATE</button>
+                    <Link className="back" to="/list-view"><FontAwesomeIcon icon={faArrowLeft} size="lg" />  BACK</Link>
+                    <button className="btn btn-success" onClick={createInvoice}>CREATE</button>
                 </div> 
             )  
         }
@@ -98,6 +100,7 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
                         placeholder="enter name" 
                         className="input-field form-control" 
                         onChange={(e) => {setInvoice({...invoice, name: e.target.value})}}
+                        required
                         value={invoice.name}
                     />
                 </div>
