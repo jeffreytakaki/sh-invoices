@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import './LineItem.scss'
 
 export const LineItem = ({description='', price=0, saveLineItem,index}) => {
     const [LineItemObj, setLineItem] = useState({description, price});
 
     const submitChange = (e) => {
-        if(e.target.className === 'description') {
+        console.log('e.target', e.target)
+        if(e.target.dataset.type === 'description') {
             setLineItem({...LineItemObj, description: e.target.value})
         } else {
             setLineItem({...LineItemObj, price: e.target.value})
@@ -17,12 +19,13 @@ export const LineItem = ({description='', price=0, saveLineItem,index}) => {
     }, [LineItemObj]);
     
     return (
-        <li>
+        <li className="line-item">
             <div className="lineItem-column description">
                 <label>description</label>
                 <input 
                     type="text" 
-                    className="description" 
+                    className="form-control" 
+                    data-type="description"
                     onChange={submitChange}
                     value={LineItemObj.description} />
             </div>
@@ -30,7 +33,8 @@ export const LineItem = ({description='', price=0, saveLineItem,index}) => {
                 <label>price</label>
                 <input 
                     type="text" 
-                    className="price" 
+                    className="form-control" 
+                    data-type="price"
                     onChange={submitChange}
                     value={LineItemObj.price}/>
             </div>

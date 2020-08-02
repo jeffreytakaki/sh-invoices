@@ -1,0 +1,38 @@
+.create-edit-invoice-container {
+    width: 90%;
+    max-width: 1024px;
+    margin: 0 auto;
+    form {
+        width: 80%;
+        margin: 0 auto;
+        .input-section {
+            height: auto;
+            label {
+                margin-right: 25px;
+            }
+            input {
+                // height: 60%;
+            }
+        } 
+        .line-items-container {
+            margin: 75px 0 25px;
+        }
+        .addLineItem {
+            cursor: pointer;
+        }
+        .invoice-footer {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            margin: 50px 0;
+            a.back {
+                margin-right: 50px;
+            }
+            .btn {
+                margin-right: 25px;
+                width: 200px;
+            }
+        }
+    }
+    
+}

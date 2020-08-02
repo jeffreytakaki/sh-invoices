@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import {LineItem} from './LineItem';
+import './CreateEditInvoice.scss'
+
+// import the library
+// get our fontawesome imports
+import { faPlus, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => {
     const history = useHistory();
@@ -62,9 +69,9 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
         if(invoices.length) {
             return (
                 <div className="invoice-footer">
-                    <Link to="/list-view">BACK</Link>
-                    <button onClick={deleteInvoice}>DELETE</button>
-                    <button onClick={createInvoice}>SAVE</button>
+                    <Link className="back" to="/list-view"><FontAwesomeIcon icon={faArrowLeft} size="lg" />  BACK</Link>
+                    <button className="btn btn-danger" onClick={deleteInvoice}>DELETE</button>
+                    <button className="btn btn-success" onClick={createInvoice}>SAVE</button>
                 </div> 
             ) 
         } else {
@@ -82,44 +89,50 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
     }, [invoice]);
 
     return (
-        <div className='invoice-container'>
+        <div className='create-edit-invoice-container'>
             <form>
-                <div className="input-section">
+                <div className="input-section form-group">
                     <label>Name:</label>
                     <input 
                         type="text" 
                         placeholder="enter name" 
-                        className="input-field" 
+                        className="input-field form-control" 
                         onChange={(e) => {setInvoice({...invoice, name: e.target.value})}}
                         value={invoice.name}
                     />
                 </div>
-                <div className="input-section">
+                <div className="input-section form-group">
                     <label>Email:</label>
                     <input 
                         type="text"
                         placeholder="enter email"
-                        className="input-field" 
+                        className="input-field form-control" 
                         onChange={(e) => {setInvoice({...invoice, email:  e.target.value})}}
                         value={invoice.email}
                     />
                 </div>
-                <div className="input-section">
+                <div className="input-section form-group">
                     <label>Due Date:</label>
                     <input 
                         type="text"
                         placeholder="enter email"
-                        className="input-field" 
+                        className="input-field form-control" 
                         onChange={(e) => {setInvoice({...invoice, dueDate:  e.target.value})}}
                         value={invoice.dueDate}
                     />
                 </div>
-                <div className="input-section">
+                <div className="input-section form-group line-items-container">
+                    <h1>Purchased Items:</h1>
+                    <ul className="line-items-list">
                     {renderLineItems}
-                    <div onClick={addLineItem}>+</div>
+                    </ul>
+                    
+                    <div className="addLineItem" onClick={addLineItem}>
+                        <FontAwesomeIcon icon={faPlus} size="lg" />
+                    </div>
                 </div>
                 <div className="input-section">
-                    total: <CalculateTotal />
+                    <h1>total: <CalculateTotal /></h1>
 
                 </div>
 

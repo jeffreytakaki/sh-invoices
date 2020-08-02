@@ -1,0 +1,28 @@
+.invoice-container {
+    display: flex;
+    border: 5px solid #00C0FF;
+    border-radius: 15px;
+    opacity: .8;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    display: flex;
+    ul {
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        align-content: space-evenly;
+    }
+    .invoice-column-edit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .invoice-column {
+        width: 100%;
+        @media (min-width: 1024px) {
+            width: 50%;    
+        }
+    }
+
+}

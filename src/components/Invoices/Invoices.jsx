@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import  { Invoice } from '../Invoice'
+import "./Invoices.scss"
 
 export const Invoices = ({invoices}) => {
     const invoiceList = invoices.map((invoice, index) => {
@@ -10,7 +11,11 @@ export const Invoices = ({invoices}) => {
 
     return (
         <div className="list-view-container">
-            <Link to="/create">Create Invoice</Link>
+            <div className="button-container">
+                <Link to="/create" className="create-link">
+                    Create Invoice
+                </Link>
+            </div>  
             <div className="list-body">
                 {invoiceList}
             </div>

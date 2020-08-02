@@ -1,0 +1,25 @@
+ul.line-items-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li.line-item {
+        display: flex;
+        flex-direction: column;
+        border: 5px solid #00C0FF;
+        margin-bottom: 25px;
+        border-radius: 15px;
+        padding: 5%;
+        @media (min-width: 1024px) {
+            flex-direction: row;
+        }
+        .lineItem-column {
+            
+            &.description {
+                width: 100%;
+            }
+            &.price {
+                
+            }
+        }
+    }
+}
