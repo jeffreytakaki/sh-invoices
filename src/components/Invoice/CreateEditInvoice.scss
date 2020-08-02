@@ -19,6 +19,14 @@
         }
         .addLineItem {
             cursor: pointer;
+            text-align: center;
+            svg {
+                -webkit-transition: transform 0.25s ease-in-out;
+                &:hover {
+                    transform: scale(1.25);
+                }
+            }   
+            
         }
         .invoice-footer {
             display: flex;

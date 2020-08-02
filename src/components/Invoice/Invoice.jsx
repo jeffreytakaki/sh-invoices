@@ -9,10 +9,10 @@ export const Invoice = ({index, name, email, dueDate, total}) => {
         <div className="invoice-container">
             <div className="invoice-column invoice-column-8">
                 <ul>
-                    <li>Name: {name}</li>
-                    <li>Email: {email}</li>
-                    <li>Due Date: {dueDate}</li>
-                    <li>Total: {total}</li>
+                    <li><strong>Name:</strong> {name}</li>
+                    <li><strong>Email:</strong> {email}</li>
+                    <li><strong>Due Date:</strong> {dueDate}</li>
+                    <li><strong>Total:</strong> {total}</li>
                 </ul>
             </div>  
             <div className="invoice-column invoice-column-edit">

@@ -19,6 +19,7 @@ export const LineItem = ({description='', price=0, saveLineItem,index}) => {
     }, [LineItemObj]);
     
     return (
+        
         <li className="line-item">
             <div className="lineItem-column description">
                 <label>description</label>

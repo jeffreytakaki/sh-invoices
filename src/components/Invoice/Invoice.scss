@@ -3,15 +3,18 @@
     border: 5px solid #00C0FF;
     border-radius: 15px;
     opacity: .8;
-    width: 80%;
+    width: 90%;
+    max-width: 800px;
     margin: 0 auto;
     margin-bottom: 25px;
     display: flex;
     ul {
-        list-style-type: none;
         display: flex;
         flex-direction: column;
         align-content: space-evenly;
+        li {
+            margin: 1%;
+        }
     }
     .invoice-column-edit {
         display: flex;
@@ -20,6 +23,7 @@
     }
     .invoice-column {
         width: 100%;
+        padding: 2.5%;
         @media (min-width: 1024px) {
             width: 50%;    
         }

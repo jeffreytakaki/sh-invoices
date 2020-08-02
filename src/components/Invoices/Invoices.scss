@@ -5,6 +5,10 @@
         height: 50px;
         background-color: #F4D176;
         margin: 50px auto;
+        -webkit-transition: transform 0.25s ease-in-out;
+        &:hover {
+            transform: scale(1.25);
+        }
         .create-link {
             display: flex;
             justify-content: center;
@@ -15,6 +19,7 @@
             color: white;
             font-weight: bold;
             font-size: 32px;
+            
         }
     }
     

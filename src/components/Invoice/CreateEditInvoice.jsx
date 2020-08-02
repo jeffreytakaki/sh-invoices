@@ -131,7 +131,7 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
                     </ul>
                     
                     <div className="addLineItem" onClick={addLineItem}>
-                        <FontAwesomeIcon icon={faPlus} size="lg" />
+                        <FontAwesomeIcon icon={faPlus} size="3x" />
                     </div>
                 </div>
                 <div className="input-section">
