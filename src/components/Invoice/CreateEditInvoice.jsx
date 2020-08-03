@@ -128,7 +128,7 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
 
     useEffect(() => {
         CalculateTotal()
-    }, []);
+    });
 
     return (
         <div className='create-edit-invoice-container'>
