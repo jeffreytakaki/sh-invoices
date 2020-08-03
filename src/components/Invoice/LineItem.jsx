@@ -16,7 +16,7 @@ export const LineItem = ({description='', price=0, saveLineItem,index}) => {
     useEffect(() => {
         // submit to higher order
         saveLineItem(LineItemObj, index)
-    },[LineItemObj, index]);
+    },[LineItemObj, index, saveLineItem]);
     
     return (
         
