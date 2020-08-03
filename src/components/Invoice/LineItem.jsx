@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './LineItem.scss'
 
-export const LineItem = ({description='', price=0, saveLineItem, index}) => {
+export const LineItem = ({description='', price=0, cb, index}) => {
     const [LineItemObj, setLineItem] = useState({description, price});
 
     const submitChange = (e) => {
@@ -13,10 +13,14 @@ export const LineItem = ({description='', price=0, saveLineItem, index}) => {
         }
     }
 
+    const saveLineItem = useCallback((LineItemObj, index) => {
+        cb(LineItemObj, index)
+    }, [cb])
+
     useEffect(() => {
         // submit to higher order
         saveLineItem(LineItemObj, index)
-    },[LineItemObj]);
+    },[LineItemObj, index]);
     
     return (
         

@@ -83,17 +83,17 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
         let newArray = [...invoice.lineItems]
         newArray[index] = lineItem
         setInvoice({...invoice, lineItems: newArray});
-    }, [])
+    }, [invoice])
 
     const renderLineItems = invoice.lineItems.map((lineItem, index) => {
-        return <LineItem key={index} index={index} description={lineItem.description} price={lineItem.price} saveLineItem={saveLineItem}/>
+        return <LineItem key={index} index={index} description={lineItem.description} price={lineItem.price} cb={saveLineItem}/>
     })
 
-    const addLineItem = () => {
+    const addLineItem = useCallback(() => {
         const newLineItem = {description: '', price: 0}
         let newArray = [...invoice.lineItems, newLineItem]
         setInvoice({...invoice, lineItems: newArray});
-    }
+    },[invoice]);
 
     const CalculateTotal = () => {
         let total = 0;
