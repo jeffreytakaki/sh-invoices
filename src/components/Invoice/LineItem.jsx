@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LineItem.scss'
 
 export const LineItem = ({description='', price=0, cb, index}) => {
@@ -16,8 +16,7 @@ export const LineItem = ({description='', price=0, cb, index}) => {
     useEffect(() => {
         // submit to higher order
         cb(LineItemObj, index)
-        // eslint-disable-line react-hooks/exhaustive-deps
-    }, [LineItemObj]);
+    }, [LineItemObj]); // eslint-disable-line 
     
     return (
         
