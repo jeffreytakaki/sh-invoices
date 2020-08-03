@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import {LineItem} from './LineItem';
@@ -79,11 +79,11 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
         history.push('/list-view')
     }
 
-    const saveLineItem = (lineItem, index) => {
+    const saveLineItem = useCallback((lineItem, index) => {
         let newArray = [...invoice.lineItems]
         newArray[index] = lineItem
         setInvoice({...invoice, lineItems: newArray});
-    }
+    }, [])
 
     const renderLineItems = invoice.lineItems.map((lineItem, index) => {
         return <LineItem key={index} index={index} description={lineItem.description} price={lineItem.price} saveLineItem={saveLineItem}/>
