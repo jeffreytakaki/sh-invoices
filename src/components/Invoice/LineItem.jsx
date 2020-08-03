@@ -22,7 +22,7 @@ export const LineItem = ({description='', price=0, saveLineItem,index}) => {
         
         <li className="line-item">
             <div className="lineItem-column description">
-                <label>description</label>
+                <label>Description</label>
                 <input 
                     type="text" 
                     className="form-control" 
@@ -31,7 +31,7 @@ export const LineItem = ({description='', price=0, saveLineItem,index}) => {
                     value={LineItemObj.description} />
             </div>
             <div className="lineItem-column price">
-                <label>price</label>
+                <label>Price</label>
                 <input 
                     type="text" 
                     className="form-control" 

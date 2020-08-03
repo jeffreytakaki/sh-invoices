@@ -2,21 +2,33 @@ ul.line-items-list {
     li.line-item {
         display: flex;
         flex-direction: column;
-        border: 5px solid #00C0FF;
+        background-color:  #00C0FF;
         margin-bottom: 25px;
         border-radius: 15px;
         padding: 5%;
-        @media (min-width: 1024px) {
+        label {
+            color: white;
+        }
+        @media (min-width: 800px) {
             flex-direction: row;
+            justify-content: space-between;
         }
         .lineItem-column {
             
             &.description {
                 width: 100%;
+                @media (min-width: 800px) {
+                    width: 75%;
+                }
             }
             &.price {
+                width: 100%;
+                @media (min-width: 800px) {
+                    width: 20%;
+                }
                 
             }
+            
         }
     }
 }
