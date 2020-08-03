@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './LineItem.scss'
 
-export const LineItem = ({description='', price=0, saveLineItem,index}) => {
+export const LineItem = ({description='', price=0, saveLineItem, index}) => {
     const [LineItemObj, setLineItem] = useState({description, price});
 
     const submitChange = (e) => {
@@ -16,7 +16,7 @@ export const LineItem = ({description='', price=0, saveLineItem,index}) => {
     useEffect(() => {
         // submit to higher order
         saveLineItem(LineItemObj, index)
-    },[LineItemObj, index, saveLineItem]);
+    },[LineItemObj]);
     
     return (
         
