@@ -66,7 +66,7 @@ function App() {
                     return <CreateEditInvoice cb={editInvoice} deleteInvoiceCb={deleteInvoice} invoices={invoices} index={index} />
                 }} />
                 <Route path="/">
-
+                    <Invoices invoices={invoices}/>
                 </Route>
             </Switch>
         </Router>
