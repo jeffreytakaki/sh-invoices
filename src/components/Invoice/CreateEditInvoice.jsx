@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import {LineItem} from './LineItem';
 import './CreateEditInvoice.scss'
+import validator from 'validator';
+import { ErrorHandling } from '../ErrorHandling'
 
 // import the library
 // get our fontawesome imports
@@ -22,13 +24,52 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
         }
     }
     const [invoice, setInvoice] = useState(loadState());
+    const [error, setError] = useState(false)
+
+    const handleValidation = (invoice) => {
+        const validations = [
+            {
+                section: 'name',
+                test: validator.isAlpha(invoice.name)
+            }, 
+            {
+                section: 'email',
+                test:  validator.isEmail(invoice.email),
+            },
+            { 
+                section: 'date',
+                test: validator.isDate(invoice.dueDate, 'MM/DD/YYYY'),
+            },
+        ]; 
+
+        console.log('validations', validations)
+        for( let i = 0; i < validations.length; i++) {
+            if(!validations[i].test) {
+                return validations[i];
+                break;
+            }
+        }
+
+        return true;
+    }
 
     const createInvoice = (e) => {
         e.preventDefault();
         if(invoice.lineItems.length > 0) {
-            cb({...invoice, total: CalculateTotal()}, index)
-            setInvoice({...initialState, initialState})
-            history.push('/list-view')
+            const build = {...invoice, total: CalculateTotal()}
+            const checkFields = handleValidation(build)
+            if(checkFields === true) {
+                setError(false)
+                cb(build, index)
+                setInvoice({...initialState, initialState})
+                history.push('/list-view')
+            } else {
+                // handle error messaging here
+                setError(`Please check ${checkFields.section} and try again`)
+            }
+            
+        } else {
+            setError(`Please add 1 or more line items and try again`)
         }
         
     }
@@ -92,6 +133,7 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
 
     return (
         <div className='create-edit-invoice-container'>
+            <ErrorHandling message={error} />
             <form>
                 <div className="input-section form-group">
                     <label>Name:</label>
@@ -118,13 +160,14 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
                     <label>Due Date:</label>
                     <input 
                         type="text"
-                        placeholder="enter email"
+                        placeholder="enter date (mm/dd/yyyy)"
                         className="input-field form-control" 
                         onChange={(e) => {setInvoice({...invoice, dueDate:  e.target.value})}}
                         value={invoice.dueDate}
                     />
                 </div>
                 <div className="input-section form-group line-items-container">
+
                     <h1>Purchased Items:</h1>
                     <ul className="line-items-list">
                     {renderLineItems}
