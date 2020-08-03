@@ -46,7 +46,6 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
         for( let i = 0; i < validations.length; i++) {
             if(!validations[i].test) {
                 return validations[i];
-                break;
             }
         }
 
