@@ -12,15 +12,12 @@ export const LineItem = ({description='', price=0, cb, index}) => {
             setLineItem({...LineItemObj, price: e.target.value})
         }
     }
-
-    const saveLineItem = useCallback((LineItemObj, index) => {
-        cb(LineItemObj, index)
-    }, [cb])
-
+    
     useEffect(() => {
         // submit to higher order
-        saveLineItem(LineItemObj, index)
-    },[LineItemObj, index]);
+        cb(LineItemObj, index)
+        // eslint-disable-line react-hooks/exhaustive-deps
+    }, [LineItemObj]);
     
     return (
         

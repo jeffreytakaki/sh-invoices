@@ -95,7 +95,7 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
         setInvoice({...invoice, lineItems: newArray});
     },[invoice]);
 
-    const CalculateTotal = () => {
+    const CalculateTotal = useCallback(() => {
         let total = 0;
         invoice.lineItems.forEach((value, index) => {
             const int = parseFloat(value.price)
@@ -105,7 +105,7 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
         })
 
         return total;
-    }
+    },[invoice])
 
     const RenderFooter = () => {
         if(invoices.length) {
@@ -128,7 +128,7 @@ export const CreateEditInvoice = ({cb, invoices=[], index, deleteInvoiceCb}) => 
 
     useEffect(() => {
         CalculateTotal()
-    });
+    }, [CalculateTotal]);
 
     return (
         <div className='create-edit-invoice-container'>
